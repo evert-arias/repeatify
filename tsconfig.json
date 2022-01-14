@@ -1,0 +1,15 @@
+{
+  "extends": "@evert-arias/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2020",
+    "lib": [
+      "es2020"
+    ],
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": [
+    "src",
+    "test"
+  ]
+}
