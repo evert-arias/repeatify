@@ -54,10 +54,10 @@ Options object to set execution parameters
 {  repeat: 10, intervalLimit: 1000}
 ```
 
-**repeat**
+repeat
 > The number of times to execute the given promise
 
-**intervalLimit**
+intervalLimit
 > Sets the minimum interval for the execution
 
 #### callbacks
@@ -74,10 +74,11 @@ Type: `object`
 }
 ```
 
-**update** (callback)
+update (callback)
 > Triggered at the end of every cycle. Provides an object with data related to the running task.
 
 ##### status object
+
 ```javascript
 {                                                      
   currentCyle: 1,                                      
@@ -88,10 +89,11 @@ Type: `object`
 }                                                      
 ```
 
-**complete** (callback)
+complete (callback)
 > Triggered when execution has finished. It provides an object with result data.
 
 ##### result object
+
 ```javascript
 {
   exitMode: 0,
@@ -99,12 +101,12 @@ Type: `object`
   options: { intervalLimit: 1000, repeat: 10 }
 }
 ```
-**exitMode**: Indicates how the execution ended; 0 = Normal (at last cycle), 1 = Abort (as per request).
 
-**totalElapsedTime**: The final duration time of the execution.
+exitMode: Indicates how the execution ended; 0 = Normal (at last cycle), 1 = Abort (as per request).
 
-**options**: This object is a copy of the original options object passed as argument.
+totalElapsedTime: The final duration time of the execution.
 
-**error** (callback)
+options: This object is a copy of the original options object passed as argument.
+
+error (callback)
 > This callback method gets triggered if there is an error on the task execution.
-
