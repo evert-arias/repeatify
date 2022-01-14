@@ -16,19 +16,19 @@ npm install repeatify
 import { throttled } from 'repeatify';
 
 function timeConsuming(_context) {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve({ data: { datetime: Date.now() } });
-		}, 200);
-	});
+ return new Promise((resolve) => {
+  setTimeout(() => {
+   resolve({ data: { datetime: Date.now() } });
+  }, 200);
+ });
 }
 
 const options = { intervalLimit: 1000, repeat: 10 };
 
 await throttled(timeConsuming, options, {
-	update: (status) => {},
-	complete: (result) => {},
-	error: (error) => {},
+ update: (status) => {},
+ complete: (result) => {},
+ error: (error) => {},
 });
 ```
 
@@ -36,16 +36,75 @@ await throttled(timeConsuming, options, {
 
 ### throttled(task, options?, callbacks?)
 
-Accepts a promise that will be executed as many time as specified with a limit interval. Returns a promise.
+Execute a promise a certain number of times guaranteeing that the execution interval is not less than the designated.
+
+#### task
+
+Type: `promise`
+
+Promise that will be executed
 
 #### options
 
 Type: `object`
 
-Options object to configure the task execution
+Options object to set execution parameters
+
+```javascript
+{  repeat: 10, intervalLimit: 1000}
+```
+
+**repeat**
+> The number of times to execute the given promise
+
+**intervalLimit**
+> Sets the minimum interval for the execution
 
 #### callbacks
 
 Type: `object`
 
-Callbacks object to receive events
+> Callbacks to handle events
+
+```javascript
+{
+ update: (status) => {},
+ complete: (result) => {},
+ error: (error) => {},
+}
+```
+
+**update** (callback)
+> Triggered at the end of every cycle. Provides an object with data related to the running task.
+
+##### status object
+```javascript
+{                                                      
+  currentCyle: 1,                                      
+  elapsedTime: 203,                                    
+  finalElapsedTime: 1000,                              
+  throttledApplied: 797,                               
+  taskResult: { data: { datetime: 1642197014924 } }    
+}                                                      
+```
+
+**complete** (callback)
+> Triggered when execution has finished. It provides an object with result data.
+
+##### result object
+```javascript
+{
+  exitMode: 0,
+  totalElapsedTime: 10171,
+  options: { intervalLimit: 1000, repeat: 10 }
+}
+```
+**exitMode**: Indicates how the execution ended; 0 = Normal (at last cycle), 1 = Abort (as per request).
+
+**totalElapsedTime**: The final duration time of the execution.
+
+**options**: This object is a copy of the original options object passed as argument.
+
+**error** (callback)
+> This callback method gets triggered if there is an error on the task execution.
+
