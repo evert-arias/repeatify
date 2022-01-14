@@ -15,7 +15,7 @@ npm install repeatify
 ```javascript
 import { throttled } from 'repeatify';
 
-function timeConsuming(_context) {
+function timeConsuming() {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve({ data: { datetime: Date.now() } });
@@ -34,7 +34,7 @@ await throttled(timeConsuming, options, {
 
 ## API
 
-### throttled(task, options?, callbacks?)
+### throttled(task, options, callbacks?)
 
 Execute a promise a certain number of times guaranteeing that the execution interval is not less than the designated.
 
@@ -43,6 +43,42 @@ Execute a promise a certain number of times guaranteeing that the execution inte
 Type: `promise`
 
 Promise that will be executed
+
+```javascript
+function timeConsuming(context) {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve({ data: { datetime: Date.now() } });
+		}, 200);
+	});
+}
+```
+
+The context argument provides contextual information about the running task.
+
+`currentCycle`
+
+> current cycle index
+
+`options`
+
+> a copy of the original options object
+
+`returning object`
+
+The `data` object in the returning object may contain any information to be received in the update event callback.
+Example:
+
+```javascript
+{ data: { datetime: Date.now() }
+```
+
+Add `abort` in the returning object to exit the process at the current cycle.
+Example:
+
+```javascript
+{ abort: true, data: { datetime: Date.now() }
+```
 
 #### options
 
@@ -54,11 +90,11 @@ Options object to set execution parameters
 {  repeat: 10, intervalLimit: 1000}
 ```
 
-repeat
+`repeat`
 
 > The number of times to execute the given promise
 
-intervalLimit
+`intervalLimit`
 
 > Sets the minimum interval for the execution
 
@@ -76,11 +112,11 @@ Type: `object`
 }
 ```
 
-update (callback)
+`update` (callback)
 
 > Triggered at the end of every cycle. Provides an object with data related to the running task.
 
-status object
+`status` object
 
 ```javascript
 {
@@ -92,11 +128,11 @@ status object
 }
 ```
 
-complete (callback)
+`complete` (callback)
 
 > Triggered when execution has finished. It provides an object with result data.
 
-result object
+`result` object
 
 ```javascript
 {
@@ -106,12 +142,12 @@ result object
 }
 ```
 
-exitMode: Indicates how the execution ended; 0 = Normal (at last cycle), 1 = Abort (as per request).
+`exitMode`: Indicates how the execution ended; 0 = Normal (at last cycle), 1 = Abort (as per request).
 
-totalElapsedTime: The final duration time of the execution.
+`totalElapsedTime`: The final duration time of the execution.
 
-options: This object is a copy of the original options object passed as argument.
+`options`: This object is a copy of the original options object passed as argument.
 
-error (callback)
+`error` (callback)
 
 > This callback method gets triggered if there is an error on the task execution.
