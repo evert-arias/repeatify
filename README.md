@@ -36,7 +36,7 @@ await throttled(timeConsuming, options, {
 
 ### throttled(task, options, callbacks?)
 
-Execute a promise a certain number of times guaranteeing that the execution interval is not less than the designated.
+Execute a promise a certain number of times with a fixed iteration interval.
 
 #### task
 
@@ -54,11 +54,11 @@ function timeConsuming(context) {
 }
 ```
 
-The context argument provides contextual information about the running task.
+The context argument provides contextual data of the running task.
 
 `currentIteration`
 
-> current cycle index
+> current iteration counter
 
 `options`
 
