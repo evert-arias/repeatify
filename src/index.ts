@@ -1,2 +1,2 @@
-export * from './throttled.js';
+export * from './throttle.js';
 export * from './model.js';

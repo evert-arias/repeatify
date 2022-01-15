@@ -1,9 +1,9 @@
 import test from 'ava';
 import {
-	throttled,
+	throttle,
 	TaskContext,
-	ThrottledResult,
-	ThrottledStatus,
+	ThrottleResult,
+	ThrottleStatus,
 } from '../src/index.js';
 
 function timeConsuming(_context: TaskContext) {
@@ -18,15 +18,15 @@ function timeConsuming(_context: TaskContext) {
 }
 
 test('basic test', async (t) => {
-	await throttled(
+	await throttle(
 		timeConsuming,
 		{ intervalLimit: 1000, repeat: 3 },
 		{
-			update: (status: ThrottledStatus) => {
+			update: (status: ThrottleStatus) => {
 				t.log('Update:');
 				t.log(status);
 			},
-			complete: (result: ThrottledResult) => {
+			complete: (result: ThrottleResult) => {
 				t.log('Result:');
 				t.log(result);
 			},

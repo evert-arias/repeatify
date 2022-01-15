@@ -1,33 +1,33 @@
 import EventEmitter from 'events';
 
-export interface ThrottledStatus {
+export interface ThrottleStatus {
 	currentIteration: number;
 	elapsedTime: number;
 	finalElapsedTime: number;
-	throttledApplied: number;
+	throttleApplied: number;
 	taskResult: TaskResult;
 }
 
-export interface ThrottledCallbacks {
-	update?: (status: ThrottledStatus) => void;
-	complete?: (result: ThrottledResult) => void;
+export interface ThrottleCallbacks {
+	update?: (status: ThrottleStatus) => void;
+	complete?: (result: ThrottleResult) => void;
 	error?: (error: any) => void;
 }
 
-export interface ThrottledOptions {
+export interface ThrottleOptions {
 	repeat: number;
 	intervalLimit: number;
 }
 
-export interface ThrottledResult {
+export interface ThrottleResult {
 	exitMode: ExitMode;
 	totalElapsedTime: number;
-	options: ThrottledOptions;
+	options: ThrottleOptions;
 }
 
-export interface ThrottledRunnerOptions {
+export interface ThrottleRunnerOptions {
 	task: (context: TaskContext) => Promise<any>;
-	options: ThrottledOptions;
+	options: ThrottleOptions;
 	emitter: EventEmitter;
 	startTime: number;
 	index: number;
@@ -35,7 +35,7 @@ export interface ThrottledRunnerOptions {
 
 export interface TaskContext {
 	currentIteration: number;
-	options: ThrottledOptions;
+	options: ThrottleOptions;
 }
 
 export interface TaskResult {

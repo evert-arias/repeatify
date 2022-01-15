@@ -1,18 +1,18 @@
 import EventEmitter from 'events';
 
 import {
-	ThrottledCallbacks,
+	ThrottleCallbacks,
 	TaskContext,
-	ThrottledOptions,
+	ThrottleOptions,
 	TaskResult,
 	ExitMode,
-	ThrottledRunnerOptions,
-	ThrottledResult,
+	ThrottleRunnerOptions,
+	ThrottleResult,
 } from './model.js';
 
 async function runner(
-	runnerOptions: ThrottledRunnerOptions
-): Promise<ThrottledResult> {
+	runnerOptions: ThrottleRunnerOptions
+): Promise<ThrottleResult> {
 	return new Promise((resolve, reject) => {
 		runnerOptions.index++;
 		// Start measuring task execution time
@@ -50,7 +50,7 @@ async function runner(
 							currentIteration: runnerOptions.index,
 							elapsedTime: taskDuration,
 							finalElapsedTime: taskDuration,
-							throttledApplied: 0,
+							throttleApplied: 0,
 							taskResult,
 						});
 						// If last cycle, terminate at this point
@@ -109,11 +109,11 @@ async function runner(
 	});
 }
 
-export async function throttled(
+export async function throttle(
 	task: (context: TaskContext) => Promise<any>,
-	options: ThrottledOptions,
-	cb?: ThrottledCallbacks
-): Promise<ThrottledResult> {
+	options: ThrottleOptions,
+	cb?: ThrottleCallbacks
+): Promise<ThrottleResult> {
 	const startingIndex = 0;
 
 	const emitter = new EventEmitter();

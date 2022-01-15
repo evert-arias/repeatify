@@ -13,7 +13,7 @@ npm install repeatify
 ## Usage
 
 ```javascript
-import { throttled } from 'repeatify';
+import { throttle } from 'repeatify';
 
 function timeConsuming() {
  return new Promise((resolve) => {
@@ -25,7 +25,7 @@ function timeConsuming() {
 
 const options = { intervalLimit: 1000, repeat: 10 };
 
-await throttled(timeConsuming, options, {
+await throttle(timeConsuming, options, {
  update: (status) => {},
  complete: (result) => {},
  error: (error) => {},
@@ -34,7 +34,7 @@ await throttled(timeConsuming, options, {
 
 ## API
 
-### throttled(task, options, callbacks?)
+### throttle(task, options, callbacks?)
 
 Execute a promise a certain number of times with a fixed iteration interval.
 
@@ -123,7 +123,7 @@ Type: `object`
   currentIteration: 1,
   elapsedTime: 203,
   finalElapsedTime: 1000,
-  throttledApplied: 797,
+  throttleApplied: 797,
   taskResult: { data: { datetime: 1642197014924 } }
 }
 ```
