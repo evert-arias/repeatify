@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 
 export interface ThrottledStatus {
-	currentCyle: number;
+	currentIteration: number;
 	elapsedTime: number;
 	finalElapsedTime: number;
 	throttledApplied: number;
@@ -34,7 +34,7 @@ export interface ThrottledRunnerOptions {
 }
 
 export interface TaskContext {
-	currentCycle: number;
+	currentIteration: number;
 	options: ThrottledOptions;
 }
 

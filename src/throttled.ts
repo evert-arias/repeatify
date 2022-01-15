@@ -20,7 +20,7 @@ async function runner(
 
 		runnerOptions
 			.task({
-				currentCycle: runnerOptions.index,
+				currentIteration: runnerOptions.index,
 				options: runnerOptions.options,
 			})
 			.then(
@@ -47,7 +47,7 @@ async function runner(
 					if (taskDuration >= runnerOptions.options.intervalLimit) {
 						const totalElapsedTime = Date.now() - runnerOptions.startTime;
 						runnerOptions.emitter.emit('update', {
-							currentCyle: runnerOptions.index,
+							currentIteration: runnerOptions.index,
 							elapsedTime: taskDuration,
 							finalElapsedTime: taskDuration,
 							throttledApplied: 0,
@@ -79,7 +79,7 @@ async function runner(
 							currentCyle: runnerOptions.index,
 							elapsedTime: taskDuration,
 							finalElapsedTime: runnerOptions.options.intervalLimit,
-							throttledApplied:
+							throttleApplied:
 								runnerOptions.options.intervalLimit - taskDuration,
 							taskResult,
 						});

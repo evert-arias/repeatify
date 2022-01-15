@@ -16,19 +16,19 @@ npm install repeatify
 import { throttled } from 'repeatify';
 
 function timeConsuming() {
- return new Promise((resolve) => {
-  setTimeout(() => {
-   resolve({ data: { datetime: Date.now() } });
-  }, 200);
- });
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve({ data: { datetime: Date.now() } });
+		}, 200);
+	});
 }
 
 const options = { intervalLimit: 1000, repeat: 10 };
 
 await throttled(timeConsuming, options, {
- update: (status) => {},
- complete: (result) => {},
- error: (error) => {},
+	update: (status) => {},
+	complete: (result) => {},
+	error: (error) => {},
 });
 ```
 
@@ -46,17 +46,17 @@ Promise that will be executed
 
 ```javascript
 function timeConsuming(context) {
- return new Promise((resolve) => {
-  setTimeout(() => {
-   resolve({ data: { datetime: Date.now() } });
-  }, 200);
- });
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve({ data: { datetime: Date.now() } });
+		}, 200);
+	});
 }
 ```
 
 The context argument provides contextual information about the running task.
 
-`currentCycle`
+`currentIteration`
 
 > current cycle index
 
@@ -120,7 +120,7 @@ Type: `object`
 
 ```javascript
 {
-  currentCyle: 1,
+  currentIteration: 1,
   elapsedTime: 203,
   finalElapsedTime: 1000,
   throttledApplied: 797,
