@@ -1,6 +1,6 @@
 {
 	"name": "repeatify",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "JavaScript/TypeScript library to run repetitive tasks with throttle control and other cool features",
 	"author": "Evert Arias",
 	"license": "MIT",
